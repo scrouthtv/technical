@@ -15,10 +15,25 @@
 
 \block{Schraubenköpfe}{
 	\begin{tikzpicture}
-		\node[draw, screwhextop] (x) at (0, 0) {};
-		\node at (0, 0) {o};
+		\begin{scope}
+			\node[draw, screwhextop] at (0, 0) {};
+			\node[draw, screwhexfront] at (0, -6) {};
+			\draw[dinthin, dinfreehand] (-1.2, -8) -- (1.2, -8);
+		\end{scope}
+		\begin{scope}[xshift = 80mm]
+			\node[draw, screwquadtop] at (0, 0) {};
+			\node[draw, screwquadfront] at (0, -6) {};
+			\draw[dinthin, dinfreehand] (-1.2, -8) -- (1.2, -8);
+		\end{scope}
+		\begin{scope}[xshift = 160mm]
+			\node[draw, screwsinktop] at (0, 0) {};
+			\node[draw, screwsinkfront] at (0, -6) {};
+			\draw[dinthin, dinfreehand] (-1.2, -8) -- (1.2, -8);
+		\end{scope}
 
-		\draw[dindashdot, dinthin] (-5, 0) -- (20, 0);
+		\draw[dinthin, dindashdot] (-5, 0) -- (20, 0);
+		\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
+
 	\end{tikzpicture}
 }
 

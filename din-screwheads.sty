@@ -1,7 +1,10 @@
 \makeatletter
 
 \pgfkeys{/tikz/screwheadsize/.initial = 50mm}
-\pgfkeys{/tikz/screwdiam/.initial = 8mm}
+\pgfkeys{/tikz/screwdiam/.initial = 12mm}
+\pgfkeys{/tikz/screwheadheight/.initial = 20mm}
+\pgfkeys{/tikz/screwheadcont/.initial = 20mm}
+\pgfkeys{/tikz/screwsinkbase/.initial = 2mm}
 
 \pgfdeclareshape{screwhextop}
 {
@@ -24,6 +27,157 @@
 		\draw[dinthick] (0, 0) circle (\shsh);
 		\draw[dinthin, dindashdash] circle (\sdiam);
   }
+	\backgroundpath{}
+}
+
+\pgfdeclareshape{screwhexfront}
+{
+  \inheritsavedanchors[from=circle]
+  \inheritanchor[from=circle]{center}
+  \inheritanchor[from=circle]{base}
+  \inheritbackgroundpath[from=circle]
+	\saveddimen\shs{\pgf@x=\pgfkeysvalueof{/tikz/screwheadsize}}
+	\saveddimen\shh{\pgf@x=\pgfkeysvalueof{/tikz/screwheadheight}}
+	\saveddimen\shc{\pgf@x=\pgfkeysvalueof{/tikz/screwheadcont}}
+  \foregroundpath{
+		\dimendef\flen=0
+		\pgfmathsetlengthmacro{\flen}{\pgfkeysvalueof{/tikz/screwheadsize} / sqrt(3)}% flank length
+		\dimendef\flenh=0
+		\pgfmathsetlengthmacro{\flenh}{\pgfkeysvalueof{/tikz/screwheadsize} / sqrt(3) / 2}% flank length half
+		\dimendef\flentt=0
+		\pgfmathsetlengthmacro{\flentt}{\pgfkeysvalueof{/tikz/screwheadsize} / sqrt(3) * 3 / 4}% flank length half
+		%\dimendef\shsh=0
+		%\pgfmathsetlengthmacro{\shsh}{\shs / 2}
+		%\dimendef\sdiam=0
+		%\pgfmathsetlengthmacro{\sdiam}{\pgfkeysvalueof{/tikz/screwdiam}}
+		%\dimendef\projlen=0
+		%\pgfmathsetlengthmacro{\projlen}{\flen / 4}
+		\dimendef\sdiam=0
+		\pgfmathsetlengthmacro{\sdiam}{\pgfkeysvalueof{/tikz/screwdiam}}
+
+		%\draw[dinthick] (0, -\shsh) -- ++(0:\flenh) -- ++(60:\flen) -- ++(120:\flen) -- ++(180:\flen) -- ++(240:\flen) -- ++(300:\flen) -- cycle;
+		%\draw[dinthick] (0, 0) circle (\shsh);
+		%\draw[dinthin, dindashdash] circle (\sdiam);
+		\draw[dinthick] (-\flen, 0) -- (\flen, 0);
+		%\draw[dinthick] (-\flenh, 0) -- ++(0, \shh);
+		%\draw[dinthick] (-\flen, 0) -- ++(0, \shh);
+		%\draw[dinthick] (\flenh, 0) -- ++(0, \shh);
+		%\draw[dinthick] (\flen, 0) -- ++(0, \shh);
+		\draw[dinthick, rounded corners = 8pt] (0, \shh) -| (\flenh, 0);
+		\draw[dinthick, rounded corners = 8pt] (0, \shh) -| (-\flenh, 0);
+		\draw[dinthick, rounded corners = 8pt] (\flentt, \shh) -| (\flenh, 0);
+		\draw[dinthick, rounded corners = 8pt] (\flentt, \shh) -| (\flen, 0);
+		\draw[dinthick, rounded corners = 8pt] (-\flentt, \shh) -| (-\flenh, 0);
+		\draw[dinthick, rounded corners = 8pt] (-\flentt, \shh) -| (-\flen, 0);
+		\draw[dinthick] (-\flentt, \shh) -- (\flentt, \shh);
+		\draw[dinthick] (-\sdiam, 0) -- (-\sdiam, -\shc);
+		\draw[dinthick] (\sdiam, 0) -- (\sdiam, -\shc);
+  }
+	\backgroundpath{}
+}
+
+\pgfdeclareshape{screwquadtop}
+{
+  \inheritsavedanchors[from=circle]
+  \inheritanchor[from=circle]{center}
+  \inheritanchor[from=circle]{base}
+  \inheritbackgroundpath[from=circle]
+	\saveddimen\shs{\pgf@x=\pgfkeysvalueof{/tikz/screwheadsize}}
+  \foregroundpath{
+		\dimendef\shsh=0
+		\pgfmathsetlengthmacro{\shsh}{\shs / 2}
+		\dimendef\sdiam=0
+		\pgfmathsetlengthmacro{\sdiam}{\pgfkeysvalueof{/tikz/screwdiam}}
+		\dimendef\flen=0
+		\pgfmathsetlengthmacro{\flen}{\pgfkeysvalueof{/tikz/screwheadsize} / sqrt(3)}% flank length
+
+		\draw[dinthick] (-\shsh, -\shsh) rectangle (\shsh, \shsh);
+		\draw[dinthin, dindashdash] circle (\sdiam);
+  }
+	\backgroundpath{}
+}
+
+\pgfdeclareshape{screwquadfront}
+{
+	\inheritsavedanchors[from=circle]
+	\inheritanchor[from=circle]{center}
+	\inheritanchor[from=circle]{base}
+	\inheritbackgroundpath[from=circle]
+	\saveddimen\shs{\pgf@x=\pgfkeysvalueof{/tikz/screwheadsize}}
+	\saveddimen\shh{\pgf@x=\pgfkeysvalueof{/tikz/screwheadheight}}
+	\saveddimen\shc{\pgf@x=\pgfkeysvalueof{/tikz/screwheadcont}}
+	\saveddimen\sdiam{\pgf@x=\pgfkeysvalueof{/tikz/screwdiam}}
+  \foregroundpath{
+		\dimendef\shsh=0
+		\pgfmathsetlengthmacro{\shsh}{\shs / 2}
+		\dimendef\flen=0
+		\pgfmathsetlengthmacro{\flen}{\pgfkeysvalueof{/tikz/screwheadsize} / sqrt(3)}% flank length
+		\dimendef\flenh=0
+		\pgfmathsetlengthmacro{\flenh}{\pgfkeysvalueof{/tikz/screwheadsize} / sqrt(3) / 2}% flank length half
+		\dimendef\flentt=0
+		\pgfmathsetlengthmacro{\flentt}{\pgfkeysvalueof{/tikz/screwheadsize} / sqrt(3) * 3 / 4}% flank length half
+		%\dimendef\shsh=0
+		%\pgfmathsetlengthmacro{\shsh}{\shs / 2}
+		%\dimendef\sdiam=0
+		%\pgfmathsetlengthmacro{\sdiam}{\pgfkeysvalueof{/tikz/screwdiam}}
+		%\dimendef\projlen=0
+		%\pgfmathsetlengthmacro{\projlen}{\flen / 4}
+
+		\draw[dinthick] (-\shsh, 0) rectangle (\shsh, \shh);
+		\draw[dinthick] (-\sdiam, 0) -- (-\sdiam, -\shc);
+		\draw[dinthick] (\sdiam, 0) -- (\sdiam, -\shc);
+
+		\draw[dinthick] (0, \shh) arc(90:60:\shs) arc(60:120:\shs);
+  }
+	\backgroundpath{}
+}
+
+\pgfdeclareshape{screwsinktop}
+{
+  \inheritsavedanchors[from=circle]
+  \inheritanchor[from=circle]{center}
+  \inheritanchor[from=circle]{base}
+  \inheritbackgroundpath[from=circle]
+	\saveddimen\shs{\pgf@x=\pgfkeysvalueof{/tikz/screwheadsize}}
+  \foregroundpath{
+		\dimendef\shsh=0
+		\pgfmathsetlengthmacro{\shsh}{\shs / 2}
+		\dimendef\sdiam=0
+		\pgfmathsetlengthmacro{\sdiam}{\pgfkeysvalueof{/tikz/screwdiam}}
+
+		\draw[dinthick] circle (\shsh);
+		\draw[dinthin, dindashdash] circle (\sdiam);
+  }
+	\backgroundpath{}
+}
+
+
+
+\pgfdeclareshape{screwsinkfront}
+{
+  \inheritsavedanchors[from=circle]
+  \inheritanchor[from=circle]{center}
+  \inheritanchor[from=circle]{base}
+  \inheritbackgroundpath[from=circle]
+	\saveddimen\sbase{\pgf@x=\pgfkeysvalueof{/tikz/screwsinkbase}}
+	\saveddimen\shs{\pgf@x=\pgfkeysvalueof{/tikz/screwheadsize}}
+	\saveddimen\shh{\pgf@x=\pgfkeysvalueof{/tikz/screwheadheight}}
+	\saveddimen\shc{\pgf@x=\pgfkeysvalueof{/tikz/screwheadcont}}
+	\saveddimen\sdiam{\pgf@x=\pgfkeysvalueof{/tikz/screwdiam}}
+	\foregroundpath{
+		\dimendef\sinklen=0
+		\pgfmathsetlengthmacro{\sinklen}{(\shs - 2*\sdiam) / sqrt(2)}
+		\draw[dinthick] (-\sdiam, 0) -- (-\sdiam, -\shc);
+		\draw[dinthick] (\sdiam, 0) -- (\sdiam, -\shc);
+		\draw[dinthick] (-\sdiam, 0) -- ++(135:\sinklen) coordinate (q);
+		\draw[dinthick] (\sdiam, 0) -- ++(45:\sinklen) coordinate (p);
+		\draw[dinthick] (-\sdiam, 0) -- (\sdiam, 0);
+		\draw[dinthick] (p) -- (q);
+		\draw[dinthick] (p) -- ++(0, \sbase) coordinate (p);
+		\draw[dinthick] (q) -- ++(0, \sbase) coordinate (q);
+		\draw[dinthick] (p) -- (q);
+
+	}
 	\backgroundpath{}
 }
 
