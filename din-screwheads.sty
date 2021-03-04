@@ -1,0 +1,30 @@
+\makeatletter
+
+\pgfkeys{/tikz/screwheadsize/.initial = 50mm}
+\pgfkeys{/tikz/screwdiam/.initial = 8mm}
+
+\pgfdeclareshape{screwhextop}
+{
+  \inheritsavedanchors[from=circle]
+  \inheritanchor[from=circle]{center}
+  \inheritanchor[from=circle]{base}
+  \inheritbackgroundpath[from=circle]
+	\saveddimen\shs{\pgf@x=\pgfkeysvalueof{/tikz/screwheadsize}}
+  \foregroundpath{
+		\dimendef\flen=0
+		\pgfmathsetlengthmacro{\flen}{\pgfkeysvalueof{/tikz/screwheadsize} / sqrt(3)}% flank length
+		\dimendef\flenh=0
+		\pgfmathsetlengthmacro{\flenh}{\pgfkeysvalueof{/tikz/screwheadsize} / sqrt(3) / 2}% flank length half
+		\dimendef\shsh=0
+		\pgfmathsetlengthmacro{\shsh}{\shs / 2}
+		\dimendef\sdiam=0
+		\pgfmathsetlengthmacro{\sdiam}{\pgfkeysvalueof{/tikz/screwdiam}}
+
+		\draw[dinthick] (0, -\shsh) -- ++(0:\flenh) -- ++(60:\flen) -- ++(120:\flen) -- ++(180:\flen) -- ++(240:\flen) -- ++(300:\flen) -- cycle;
+		\draw[dinthick] (0, 0) circle (\shsh);
+		\draw[dinthin, dindashdash] circle (\sdiam);
+  }
+	\backgroundpath{}
+}
+
+\makeatother

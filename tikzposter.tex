@@ -1,0 +1,25 @@
+\documentclass[a1paper, landscape]{tikzposter}
+
+\usepackage{din-base}
+\usepackage{din-screwheads}
+
+\usepackage{fontspec}
+\setmainfont{osifont.ttf}
+
+\title{Metrische Schrauben}
+\author{Lenni vH}
+
+\begin{document} 
+
+\maketitle
+
+\block{Schraubenköpfe}{
+	\begin{tikzpicture}
+		\node[draw, screwhextop] (x) at (0, 0) {};
+		\node at (0, 0) {o};
+
+		\draw[dindashdot, dinthin] (-5, 0) -- (20, 0);
+	\end{tikzpicture}
+}
+
+\end{document}
