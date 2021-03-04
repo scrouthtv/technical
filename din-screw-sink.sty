@@ -1,0 +1,52 @@
+\makeatletter
+
+\pgfdeclareshape{screwsinktop}
+{
+  \inheritsavedanchors[from=circle]
+  \inheritanchor[from=circle]{center}
+  \inheritanchor[from=circle]{base}
+  \inheritbackgroundpath[from=circle]
+	\saveddimen\shs{\pgf@x=\pgfkeysvalueof{/tikz/screwheadsize}}
+  \foregroundpath{
+		\dimendef\shsh=0
+		\pgfmathsetlengthmacro{\shsh}{\shs / 2}
+		\dimendef\sdiam=0
+		\pgfmathsetlengthmacro{\sdiam}{\pgfkeysvalueof{/tikz/screwdiam}}
+
+		\draw[dinthick] circle (\shsh);
+		\draw[dinthin, dindashdash] circle (\sdiam);
+  }
+	\backgroundpath{}
+}
+
+
+
+\pgfdeclareshape{screwsinkfront}
+{
+  \inheritsavedanchors[from=circle]
+  \inheritanchor[from=circle]{center}
+  \inheritanchor[from=circle]{base}
+  \inheritbackgroundpath[from=circle]
+	\saveddimen\sbase{\pgf@x=\pgfkeysvalueof{/tikz/screwsinkbase}}
+	\saveddimen\shs{\pgf@x=\pgfkeysvalueof{/tikz/screwheadsize}}
+	\saveddimen\shh{\pgf@x=\pgfkeysvalueof{/tikz/screwheadheight}}
+	\saveddimen\shc{\pgf@x=\pgfkeysvalueof{/tikz/screwheadcont}}
+	\saveddimen\sdiam{\pgf@x=\pgfkeysvalueof{/tikz/screwdiam}}
+	\foregroundpath{
+		\dimendef\sinklen=0
+		\pgfmathsetlengthmacro{\sinklen}{(\shs - 2*\sdiam) / sqrt(2)}
+		\draw[dinthick] (-\sdiam, 0) -- (-\sdiam, -\shc);
+		\draw[dinthick] (\sdiam, 0) -- (\sdiam, -\shc);
+		\draw[dinthick] (-\sdiam, 0) -- ++(135:\sinklen) coordinate (q);
+		\draw[dinthick] (\sdiam, 0) -- ++(45:\sinklen) coordinate (p);
+		\draw[dinthick] (-\sdiam, 0) -- (\sdiam, 0);
+		\draw[dinthick] (p) -- (q);
+		\draw[dinthick] (p) -- ++(0, \sbase) coordinate (p);
+		\draw[dinthick] (q) -- ++(0, \sbase) coordinate (q);
+		\draw[dinthick] (p) -- (q);
+
+	}
+	\backgroundpath{}
+}
+
+\makeatother

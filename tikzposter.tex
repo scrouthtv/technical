@@ -1,7 +1,7 @@
 \documentclass[a1paper, landscape]{tikzposter}
 
 \usepackage{din-base}
-\usepackage{din-screwheads}
+\usepackage{din-screws}
 
 \usepackage{fontspec}
 \setmainfont{osifont.ttf}
@@ -19,20 +19,22 @@
 			\node[draw, screwhextop] at (0, 0) {};
 			\node[draw, screwhexfront] at (0, -6) {};
 			\draw[dinthin, dinfreehand] (-1.2, -8) -- (1.2, -8);
+			\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
 		\end{scope}
 		\begin{scope}[xshift = 80mm]
 			\node[draw, screwquadtop] at (0, 0) {};
 			\node[draw, screwquadfront] at (0, -6) {};
 			\draw[dinthin, dinfreehand] (-1.2, -8) -- (1.2, -8);
+			\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
 		\end{scope}
 		\begin{scope}[xshift = 160mm]
 			\node[draw, screwsinktop] at (0, 0) {};
 			\node[draw, screwsinkfront] at (0, -6) {};
 			\draw[dinthin, dinfreehand] (-1.2, -8) -- (1.2, -8);
+			\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
 		\end{scope}
 
 		\draw[dinthin, dindashdot] (-5, 0) -- (20, 0);
-		\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
 
 	\end{tikzpicture}
 }
