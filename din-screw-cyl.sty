@@ -34,7 +34,8 @@
 		\pgfmathsetlengthmacro{\shsh}{\shs / 2}
 		\dimendef\flen=0
 
-		\draw[dinthick] (-\shsh, 0) rectangle (\shsh, \shh);
+		\draw[dinthick] (-\shsh, 0) -- (\shsh, 0);
+		\draw[dinthick, rounded corners = 3pt] (\shsh, 0) -- (\shsh, \shh) -| (-\shsh, 0);
 		\draw[dinthick] (-\sdiam, 0) -- (-\sdiam, -\shc);
 		\draw[dinthick] (\sdiam, 0) -- (\sdiam, -\shc);
   }
