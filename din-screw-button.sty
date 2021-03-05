@@ -1,0 +1,51 @@
+\makeatletter
+
+\usetikzlibrary{calc}
+
+\pgfdeclareshape{screwbuttontop}
+{
+  \inheritsavedanchors[from=circle]
+  \inheritanchor[from=circle]{center}
+  \inheritanchor[from=circle]{base}
+  \inheritbackgroundpath[from=circle]
+	\saveddimen\shs{\pgf@x=\pgfkeysvalueof{/tikz/screw head size}}
+  \foregroundpath{
+		\dimendef\shsh=0
+		\pgfmathsetlengthmacro{\shsh}{\shs / 2}
+		\dimendef\sdiam=0
+		\pgfmathsetlengthmacro{\sdiam}{\pgfkeysvalueof{/tikz/screw screw outer rad}}
+		\dimendef\flen=0
+		\pgfmathsetlengthmacro{\flen}{\pgfkeysvalueof{/tikz/screw head size} / sqrt(3)}% flank length
+
+		\draw[dinthick] (-\shsh, -\shsh) rectangle (\shsh, \shsh);
+		\draw[dinthin, dindashdash] circle (\sdiam);
+  }
+	\backgroundpath{}
+}
+
+\pgfdeclareshape{screwbuttonfront}
+{
+	\inheritsavedanchors[from=circle]
+	\inheritanchor[from=circle]{center}
+	\inheritanchor[from=circle]{base}
+	\inheritbackgroundpath[from=circle]
+	\saveddimen\shs{\pgf@x=\pgfkeysvalueof{/tikz/screw head size}}
+	\saveddimen\shh{\pgf@x=\pgfkeysvalueof{/tikz/screw head height}}
+	\saveddimen\shc{\pgf@x=\pgfkeysvalueof{/tikz/screw head screw height}}
+	\saveddimen\sdiam{\pgf@x=\pgfkeysvalueof{/tikz/screw screw outer rad}}
+  \foregroundpath{
+		\dimendef\shsh=0
+		\pgfmathsetlengthmacro{\shsh}{\shs / 2}
+		\dimendef\flen=0
+
+		\draw[dinthick] (-\sdiam, 0) -- (-\sdiam, -\shc);
+		\draw[dinthick] (\sdiam, 0) -- (\sdiam, -\shc);
+
+		\draw[dinthick] (0, \shh) arc(90:60:\shs) -- (\shsh, 0);
+		\draw[dinthick] (0, \shh) arc(90:120:\shs) -- (-\shsh, 0);
+		\draw[dinthick] (\shsh, 0) -- (-\shsh, 0);
+  }
+	\backgroundpath{}
+}
+
+\makeatother

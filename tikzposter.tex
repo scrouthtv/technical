@@ -20,34 +20,40 @@
 \block{Schraubenköpfe}{
 	\begin{tikzpicture}[ % M16
 			screw head size = 24mm, screw screw outer rad = 6.775mm,
-			screw head height = 8.8mm, screw head sink base = 2mm
+			screw head height = 10mm, screw head sink base = 1mm
 		]
 		\begin{scope}
 			\node[draw, screwhextop] at (0, 0) {};
-			\node[draw, screwhexfront] at (0, -6) {};
-			\draw[dinthin, dinfreehand] (-6.775mm, -8) -- (6.775mm, -8);
+			\node[draw, screwhexfront] at (0, -4) {};
+			\draw[dinthin, dinfreehand] (-6.775mm, -6) -- (6.775mm, -6);
 			\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
 		\end{scope}
 		\begin{scope}[xshift = 80mm]
 			\node[draw, screwquadtop] at (0, 0) {};
-			\node[draw, screwquadfront] at (0, -6) {};
-			\draw[dinthin, dinfreehand] (-6.775mm, -8) -- (6.775mm, -8);
+			\node[draw, screwquadfront] at (0, -4) {};
+			\draw[dinthin, dinfreehand] (-6.775mm, -6) -- (6.775mm, -6);
 			\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
 		\end{scope}
-		\begin{scope}[xshift = 160mm]
+		\begin{scope}[xshift = 160mm, screw head height = 16mm]
 			\node[draw, screwcyltop] at (0, 0) {};
-			\node[draw, screwcylfront] at (0, -6) {};
-			\draw[dinthin, dinfreehand] (-6.775mm, -8) -- (6.775mm, -8);
+			\node[draw, screwcylfront] at (0, -4) {};
+			\draw[dinthin, dinfreehand] (-6.775mm, -6) -- (6.775mm, -6);
 			\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
 		\end{scope}
-		\begin{scope}[xshift = 240mm]
+		\begin{scope}[xshift = 240mm, screw head size = 30mm]
 			\node[draw, screwsinktop] at (0, 0) {};
-			\node[draw, screwsinkfront] at (0, -6) {};
-			\draw[dinthin, dinfreehand] (-6.775mm, -8) -- (6.775mm, -8);
+			\node[draw, screwsinkfront] at (0, -4) {};
+			\draw[dinthin, dinfreehand] (-6.775mm, -6) -- (6.775mm, -6);
+			\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
+		\end{scope}
+		\begin{scope}[xshift = 320mm, screw head size = 30mm]
+			\node[draw, screwbuttontop] at (0, 0) {};
+			\node[draw, screwbuttonfront] at (0, -4) {};
+			\draw[dinthin, dinfreehand] (-6.775mm, -6) -- (6.775mm, -6);
 			\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
 		\end{scope}
 
-		\draw[dinthin, dindashdot] (-5, 0) -- (29, 0);
+		\draw[dinthin, dindashdot] (-5, 0) -- (37, 0);
 
 	\end{tikzpicture}
 }
