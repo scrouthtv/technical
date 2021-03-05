@@ -4,6 +4,11 @@ Osifont is provided under GPL by `hikikomori82@gmail.com`.
 
 My `sty` files are licensed under GPL as well. Feel free to use them.
 
+## Dimline
+The `din-dimline` package is adapted from `tikz-dimline`, provided under WTFPL by Sébastien Gross.
+
+`din-dimline` is explicitely **not** compatible with `pgfplots`.
+
 ## Screws
 
 ### Button head screw
