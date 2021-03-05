@@ -6,14 +6,14 @@
   \inheritanchor[from=circle]{center}
   \inheritanchor[from=circle]{base}
   \inheritbackgroundpath[from=circle]
-	\saveddimen\shs{\pgf@x=\pgfkeysvalueof{/tikz/screwheadsize}}
+	\saveddimen\shs{\pgf@x=\pgfkeysvalueof{/tikz/screw head size}}
   \foregroundpath{
 		\dimendef\shsh=0
 		\pgfmathsetlengthmacro{\shsh}{\shs / 2}
 		\dimendef\sdiam=0
-		\pgfmathsetlengthmacro{\sdiam}{\pgfkeysvalueof{/tikz/screwdiam}}
+		\pgfmathsetlengthmacro{\sdiam}{\pgfkeysvalueof{/tikz/screw screw outer rad}}
 		\dimendef\flen=0
-		\pgfmathsetlengthmacro{\flen}{\pgfkeysvalueof{/tikz/screwheadsize} / sqrt(3)}% flank length
+		\pgfmathsetlengthmacro{\flen}{\pgfkeysvalueof{/tikz/screw head size} / sqrt(3)}% flank length
 
 		\draw[dinthick] (-\shsh, -\shsh) rectangle (\shsh, \shsh);
 		\draw[dinthin, dindashdash] circle (\sdiam);
@@ -27,25 +27,19 @@
 	\inheritanchor[from=circle]{center}
 	\inheritanchor[from=circle]{base}
 	\inheritbackgroundpath[from=circle]
-	\saveddimen\shs{\pgf@x=\pgfkeysvalueof{/tikz/screwheadsize}}
-	\saveddimen\shh{\pgf@x=\pgfkeysvalueof{/tikz/screwheadheight}}
-	\saveddimen\shc{\pgf@x=\pgfkeysvalueof{/tikz/screwheadcont}}
-	\saveddimen\sdiam{\pgf@x=\pgfkeysvalueof{/tikz/screwdiam}}
+	\saveddimen\shs{\pgf@x=\pgfkeysvalueof{/tikz/screw head size}}
+	\saveddimen\shh{\pgf@x=\pgfkeysvalueof{/tikz/screw head height}}
+	\saveddimen\shc{\pgf@x=\pgfkeysvalueof{/tikz/screw head screw height}}
+	\saveddimen\sdiam{\pgf@x=\pgfkeysvalueof{/tikz/screw screw outer rad}}
   \foregroundpath{
 		\dimendef\shsh=0
 		\pgfmathsetlengthmacro{\shsh}{\shs / 2}
 		\dimendef\flen=0
-		\pgfmathsetlengthmacro{\flen}{\pgfkeysvalueof{/tikz/screwheadsize} / sqrt(3)}% flank length
+		\pgfmathsetlengthmacro{\flen}{\pgfkeysvalueof{/tikz/screw head size} / sqrt(3)}% flank length
 		\dimendef\flenh=0
-		\pgfmathsetlengthmacro{\flenh}{\pgfkeysvalueof{/tikz/screwheadsize} / sqrt(3) / 2}% flank length half
+		\pgfmathsetlengthmacro{\flenh}{\pgfkeysvalueof{/tikz/screw head size} / sqrt(3) / 2}% flank length half
 		\dimendef\flentt=0
-		\pgfmathsetlengthmacro{\flentt}{\pgfkeysvalueof{/tikz/screwheadsize} / sqrt(3) * 3 / 4}% flank length half
-		%\dimendef\shsh=0
-		%\pgfmathsetlengthmacro{\shsh}{\shs / 2}
-		%\dimendef\sdiam=0
-		%\pgfmathsetlengthmacro{\sdiam}{\pgfkeysvalueof{/tikz/screwdiam}}
-		%\dimendef\projlen=0
-		%\pgfmathsetlengthmacro{\projlen}{\flen / 4}
+		\pgfmathsetlengthmacro{\flentt}{\pgfkeysvalueof{/tikz/screw head size} / sqrt(3) * 3 / 4}% flank length two thirds
 
 		\draw[dinthick] (-\shsh, 0) rectangle (\shsh, \shh);
 		\draw[dinthick] (-\sdiam, 0) -- (-\sdiam, -\shc);

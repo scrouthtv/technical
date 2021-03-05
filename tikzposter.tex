@@ -6,6 +6,8 @@
 \usepackage{fontspec}
 \setmainfont{osifont.ttf}
 
+\usepackage{multirow}
+
 \title{Metrische Schrauben}
 \author{Lenni vH}
 
@@ -13,30 +15,49 @@
 
 \maketitle
 
+\begin{columns}
+\column{.7}
 \block{Schraubenköpfe}{
-	\begin{tikzpicture}
+	\begin{tikzpicture}[ % M16
+			screw head size = 24mm, screw screw outer rad = 6.775mm,
+			screw head height = 8.8mm, screw head sink base = 2mm
+		]
 		\begin{scope}
 			\node[draw, screwhextop] at (0, 0) {};
 			\node[draw, screwhexfront] at (0, -6) {};
-			\draw[dinthin, dinfreehand] (-1.2, -8) -- (1.2, -8);
+			\draw[dinthin, dinfreehand] (-6.775mm, -8) -- (6.775mm, -8);
 			\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
 		\end{scope}
 		\begin{scope}[xshift = 80mm]
 			\node[draw, screwquadtop] at (0, 0) {};
 			\node[draw, screwquadfront] at (0, -6) {};
-			\draw[dinthin, dinfreehand] (-1.2, -8) -- (1.2, -8);
+			\draw[dinthin, dinfreehand] (-6.775mm, -8) -- (6.775mm, -8);
 			\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
 		\end{scope}
 		\begin{scope}[xshift = 160mm]
+			\node[draw, screwcyltop] at (0, 0) {};
+			\node[draw, screwcylfront] at (0, -6) {};
+			\draw[dinthin, dinfreehand] (-6.775mm, -8) -- (6.775mm, -8);
+			\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
+		\end{scope}
+		\begin{scope}[xshift = 240mm]
 			\node[draw, screwsinktop] at (0, 0) {};
 			\node[draw, screwsinkfront] at (0, -6) {};
-			\draw[dinthin, dinfreehand] (-1.2, -8) -- (1.2, -8);
+			\draw[dinthin, dinfreehand] (-6.775mm, -8) -- (6.775mm, -8);
 			\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
 		\end{scope}
 
-		\draw[dinthin, dindashdot] (-5, 0) -- (20, 0);
+		\draw[dinthin, dindashdot] (-5, 0) -- (29, 0);
 
 	\end{tikzpicture}
 }
+\block{Schafte}{
+	asdf
+}
+\column{.3}
+\block{a}{
+asdf
+}
+\end{columns}
 
 \end{document}
