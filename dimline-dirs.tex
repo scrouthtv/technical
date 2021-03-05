@@ -1,0 +1,26 @@
+\documentclass[margin = 12mm]{standalone}
+
+\usepackage{tikz}
+\usepackage{din-dimline}
+
+\usepackage{fontspec}
+\setmainfont{osifont.ttf}
+
+\usepackage{ulem}
+
+\begin{document}
+\begin{tikzpicture}
+
+	\foreach \x [evaluate = \x as \ang using 90+\x] in {0,30,...,330}{
+		\path (0, 0) -- ++(\x:10mm) coordinate (a);
+		\path (0, 0) -- ++(\x:50mm) coordinate (b);
+		\dimline[extension angle = \ang,
+		extension start offset = 0mm,
+		extension end offset = 0mm,
+		extension start overhang = 0mm,
+		extension end overhang = 0mm
+		]{(a)}{(b)}{20}
+	}
+
+\end{tikzpicture}
+\end{document}

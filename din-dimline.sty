@@ -101,6 +101,7 @@
 		extension start path/.get = \dimline@extension@start@path,
 		extension end style/.get = \dimline@extension@end@style,
 		extension end path/.get = \dimline@extension@end@path,
+		extension angle/.get = \dimline@extension@angle
 	}
 
 	\begin{scope} [
@@ -154,7 +155,12 @@
 		\draw[helpline] (b) -- ++(\pgfkeysvalueof{/dimline/extension angle}:
 		\pgfkeysvalueof{/dimline/extension end offset}) coordinate (bdl) -- ++(\pgfkeysvalueof{/dimline/extension angle}:\pgfkeysvalueof{/dimline/extension end overhang});
 
-		\draw[line] (adl) -- (bdl) node[label] {#4};
+		\pgfmathparse{\dimline@extension@angle > 359 ? int(1) : int(0)}
+		\ifnum\pgfmathresult=1
+			\draw[line, rotate = 180] (adl) -- (bdl) node[label] {#4};
+		\else
+			\draw[line] (adl) -- (bdl) node[label] {#4};
+		\fi
 
 	\end{scope}
 }
