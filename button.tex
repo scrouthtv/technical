@@ -1,0 +1,34 @@
+\documentclass[margin = 12mm]{standalone}
+
+\usepackage{tikz}
+
+\usepackage{mathspec}
+\setallmainfonts(Digits,Latin){osifont.ttf}
+
+\usepackage{din-screws}
+\usepackage{din-dimline}
+
+\begin{document}
+% M10
+\begin{tikzpicture}[screw head size = 20mm, screw head height = 7.5mm,
+		screw screw outer rad = 4.08mm, screw head screw height = 5mm
+	]
+	\node[draw, screwbuttonfront] at (0, 0) {};
+	\node at (0, -1) {DIN 7985};
+	\draw[dinthin] (-10mm, 1) -- (10mm, 1);
+	\draw[dinthin, dinfreehand] (-4.08mm, -5mm) -- (4.08mm, -5mm);
+	\begin{scope}[xshift = 40mm]
+		\draw[dinthick] (0, 7.5mm) arc(90:51.318:16mm) -- (10mm, 0);
+		\draw[dinthick] (0, 7.5mm) arc(90:128.68:16mm) -- (-10mm, 0);
+		\draw[dinthick] (-10mm, 0) -- (10mm, 0);
+		\node at (0, -1) {DIN EN ISO 7405};
+		\draw[dinthick] (4.08mm, 0) -- (4.08mm, -5mm);
+		\draw[dinthick] (-4.08mm, 0) -- (-4.08mm, -5mm);
+		\draw[dinthin, dinfreehand] (-4.08mm, -5mm) -- (4.08mm, -5mm);
+
+		%\draw[dinthin] (-10mm, 1) -- (10mm, 1);
+		\dimline{(-10mm, 0)}{(10mm, 0)}{\(d_k\)}
+
+	\end{scope}
+\end{tikzpicture}
+\end{document}

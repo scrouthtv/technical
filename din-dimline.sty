@@ -5,8 +5,10 @@
 \RequirePackage{tikz}
 \RequirePackage{pgfplots}
 \RequirePackage{ifthen}
+\RequirePackage{din-base}
 
 \usetikzlibrary{calc,decorations.markings,arrows}
+\usetikzlibrary{arrows.meta}
 
 \makeatletter
 
@@ -67,10 +69,7 @@
 % measure length
 % http://tex.stackexchange.com/questions/123913
 
-
-\newcommand{\dimline@do@nothing}[1]{#1}%
 % http://tex.stackexchange.com/questions/58283/tikz-how-to-determine-the-vector-between-two-co-ordinates
-
 
 % #1: optional keys parameters
 % #2: start point
@@ -86,14 +85,13 @@
 		extension end offset/.initial = 20mm,
 		extension start overhang/.initial = 2mm,
 		extension end overhang/.initial = 2mm,
-		extension start angle/.initial = -90,
-		extension end angle/.initial = 90,
+		extension angle/.initial = -90,
 		line style/.initial = {},
-		label style/.initial = {},
+		label style/.initial = {yshift = 0.5\baselineskip},
 		extension style/.initial = {},
-		extension start style/.initial = {},
+		extension start style/.initial = {dinthin},
 		extension start path/.initial = {},
-		extension end style/.initial = {},
+		extension end style/.initial = {dinthin},
 		extension end path/.initial = {},
 		#1,
 		line style/.get = \dimline@line@style,
@@ -108,11 +106,15 @@
 	\begin{scope} [
 		line/.style = {
 			color=\pgfkeysvalueof{/dimline/color},
-			arrows=dimline-dimline,
+			arrows={Triangle[angle=15:3mm]}-{Triangle[angle=15:3mm]},
+			/dimline/execute macro = \dimline@line@style,
+		},
+		helpline/.style = {
+			color=\pgfkeysvalueof{/dimline/color},
 			/dimline/execute macro = \dimline@line@style,
 		},
 		extension/.style = {
-			color=\pgfkeysvalueof{/dimline/color}!40, line width=0.01,
+			color=\pgfkeysvalueof{/dimline/color}, line width=0.01,
 			/dimline/execute macro = \dimline@extension@style,
 		},
 		extension start/.style = {
@@ -124,29 +126,36 @@
 			/dimline/execute macro = \dimline@extension@end@style,
 		},
 		label/.style = {
-			fill=white, align=center, sloped=true, pos=0.5,
+			align=center, sloped=true, pos=0.5,
 			/dimline/execute macro = \dimline@label@style
 		},
 		]
 
-		\coordinate (a) at #2 {};
-		\coordinate (b) at #3 {};
+		\coordinate (a) at #2;
+		\coordinate (b) at #3;
 
-		\ifthenelse{\equal{\dimline@extension@start@path}{}}{
-			\coordinate (a to b) at ($(a)!\pgfkeysvalueof{/dimline/extension start offset}!\pgfkeysvalueof{/dimline/extension start angle}:(b)$);
-			\draw [extension start] (a.center) -- (a to b);
-		} {
-			\draw [extension start] plot coordinates {\dimline@extension@start@path};
-		}
+		%%\ifthenelse{\equal{\dimline@extension@start@path}{}}{
+		%\coordinate (a to b) at ($(a)!\pgfkeysvalueof{/dimline/extension start offset}!\pgfkeysvalueof{/dimline/extension start angle}:(b)$);
+		%\draw [extension start] (a.center) -- (a to b);
+%
+		%%\ifthenelse{\equal{\dimline@extension@end@path}{}}{
+		%\coordinate (b to a) at ($(b)!\pgfkeysvalueof{/dimline/extension end offset}!\pgfkeysvalueof{/dimline/extension end angle}:(a)$);
+		%\draw [extension end] (b.center) -- (b to a);
+%
+		%\draw[helpline] (a to b) -- ++(\pgfkeysvalueof{/dimline/extension start angle}:\pgfkeysvalueof{/dimline/extension start overhang});
+		%\draw[helpline] (b to a) -- ++(\pgfkeysvalueof{/dimline/extension end angle}:\pgfkeysvalueof{/dimline/extension end overhang});
+%
+		%\draw (0, 0) -- (b to a);
+%
+		%\draw[line] (a to b) -- (b to a) node[label] {#4};
 
-		\ifthenelse{\equal{\dimline@extension@end@path}{}}{
-			\coordinate (b to a) at ($(b)!\pgfkeysvalueof{/dimline/extension end offset}!\pgfkeysvalueof{/dimline/extension end angle}:(a)$);
-			\draw [extension end] (b.center) -- (b to a);
-		} {
-			\draw [extension end] plot coordinates {\dimline@extension@end@path};
-		}
+		\draw[helpline] (a) -- ++(\pgfkeysvalueof{/dimline/extension angle}:\pgfkeysvalueof{/dimline/extension start offset}) coordinate (adl) -- ++(\pgfkeysvalueof{/dimline/extension angle}:\pgfkeysvalueof{/dimline/extension start overhang});
 
-		\draw[line] (a.center) -- (b.center) node[label] {#4};
+		\draw[helpline] (b) -- ++(\pgfkeysvalueof{/dimline/extension angle}:
+		\pgfkeysvalueof{/dimline/extension end offset}) coordinate (bdl) -- ++(\pgfkeysvalueof{/dimline/extension angle}:\pgfkeysvalueof{/dimline/extension end overhang});
+
+		\draw[line] (adl) -- (bdl) node[label] {#4};
+
 	\end{scope}
 }
 
