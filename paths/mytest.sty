@@ -1,11 +1,14 @@
 \makeatletter
 
+\pgfkeys{/tikz/screw head size/.initial = 50mm}
+\pgfkeys{/tikz/screw head round/.initial = 5mm}
+
 \pgfdeclareshape{hexagon}{
 	\inheritsavedanchors[from=circle]
 	\inheritanchor[from=circle]{center}
 	\inheritbackgroundpath[from=circle]
-	\saveddimen{\cornerround}{\pgf@x=5mm}
-	\saveddimen{\height}{\pgf@x=50mm}
+	\saveddimen{\cornerround}{\pgf@x=\pgfkeysvalueof{/tikz/screw head round}}
+	\saveddimen{\height}{\pgf@x=\pgfkeysvalueof{/tikz/screw head size}}
 	\foregroundpath{
 		\dimendef\pgf@hh=0% half height
 		\dimendef\flen=0%
@@ -14,7 +17,7 @@
 		\pgfmathsetlengthmacro{\flen}{\height / sqrt(3)}%
 		\pgfmathsetlengthmacro{\flenh}{\height / sqrt(3) / 2}%
 
-		\pgfsetcornersarced{\pgfpoint{5mm}{5mm}}
+		\pgfsetcornersarced{\pgfpoint{\cornerround}{\cornerround}}
 		\pgfpathmoveto{\pgfpoint{0mm}{-\pgf@hh}}
 		\pgfpathlineto{\pgfpoint{\flenh}{-\pgf@hh}}
 		\pgfpathlineto{\pgfpoint{\flen}{0mm}}
@@ -23,6 +26,8 @@
 		\pgfpathlineto{\pgfpoint{-\flen}{0mm}}
 		\pgfpathlineto{\pgfpoint{-\flenh}{-\pgf@hh}}
 		\pgfpathclose
+		\pgfusepath{stroke}
+		\pgfpathcircle{\centerpoint}{\pgf@hh}
 		\pgfusepath{stroke}
 	}
 }
