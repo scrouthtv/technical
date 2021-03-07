@@ -2,24 +2,27 @@
 
 \pgfdeclareshape{hexagon}{
 	\inheritsavedanchors[from=circle]
-	\inheritanchorborder[from=circle]
 	\inheritanchor[from=circle]{center}
 	\inheritbackgroundpath[from=circle]
 	\saveddimen{\cornerround}{\pgf@x=5mm}
-	\saveddimen{\sw}{\pgf@x=50mm}
+	\saveddimen{\height}{\pgf@x=50mm}
 	\foregroundpath{
-		\dimendef\pgf@flen=0
-		\dimendef\pgf@swh=0
-		\dimendef\pgf@wtfasdfasdf=0
-		\pgfmathsetlength{\pgf@flen}{\sw / sqrt(3)}
-		\pgfmathsetlength{\pgf@swh}{\sw / 2}
-		\pgfmathsetlength{\pgf@wtfasdfasdf}{\sw / sqrt(3) / 2}
-		\pgfmathsetlength{\pgf@yb}{-\pgf@swh}
+		\dimendef\pgf@hh=0% half height
+		\dimendef\flen=0%
+		\dimendef\flenh=0%
+		\pgfmathsetlength{\pgf@hh}{(\height / 2)}%
+		\pgfmathsetlengthmacro{\flen}{\height / sqrt(3)}%
+		\pgfmathsetlengthmacro{\flenh}{\height / sqrt(3) / 2}%
 
-		%\pgfsetcornersarced{\pgfpoint{5mm}{5mm}}
-		\pgfpathmoveto{\pgfpoint{0mm}{-\pgf@swh}}
-		\pgfpathlineto{\pgfpoint{14.434mm}{\pgf@yb}}
-		\pgfpathlineto{\pgfpoint{28.897mm}{0mm}}
+		\pgfsetcornersarced{\pgfpoint{5mm}{5mm}}
+		\pgfpathmoveto{\pgfpoint{0mm}{-\pgf@hh}}
+		\pgfpathlineto{\pgfpoint{\flenh}{-\pgf@hh}}
+		\pgfpathlineto{\pgfpoint{\flen}{0mm}}
+		\pgfpathlineto{\pgfpoint{\flenh}{\pgf@hh}}
+		\pgfpathlineto{\pgfpoint{-\flenh}{\pgf@hh}}
+		\pgfpathlineto{\pgfpoint{-\flen}{0mm}}
+		\pgfpathlineto{\pgfpoint{-\flenh}{-\pgf@hh}}
+		\pgfpathclose
 		\pgfusepath{stroke}
 	}
 }
