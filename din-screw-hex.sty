@@ -4,24 +4,34 @@
 {
   \inheritsavedanchors[from=circle]
   \inheritanchor[from=circle]{center}
-  \inheritanchor[from=circle]{base}
-  \inheritbackgroundpath[from=circle]
-	\saveddimen\shs{\pgf@x=\pgfkeysvalueof{/tikz/screw head size}}
-  \foregroundpath{
+	\saveddimen\cornerround{\pgf@x=\pgfkeysvalueof{/tikz/screw head round}}
+	\saveddimen\height{\pgf@x=\pgfkeysvalueof{/tikz/screw head size}}
+  \backgroundpath{
+		\dimendef\pgf@half=0
 		\dimendef\flen=0
-		\pgfmathsetlengthmacro{\flen}{\pgfkeysvalueof{/tikz/screw head size} / sqrt(3)}% flank length
 		\dimendef\flenh=0
-		\pgfmathsetlengthmacro{\flenh}{\pgfkeysvalueof{/tikz/screw head size} / sqrt(3) / 2}% flank length half
-		\dimendef\shsh=0
-		\pgfmathsetlengthmacro{\shsh}{\shs / 2}
-		\dimendef\sdiam=0
-		\pgfmathsetlengthmacro{\srad}{\pgfkeysvalueof{/tikz/screw screw outer rad}}
+		\pgfmathsetlength{\pgf@half}{\height / 2}
+		\pgfmathsetlengthmacro{\flen}{\height / sqrt(3)}% flank length
+		\pgfmathsetlengthmacro{\flenh}{\height / sqrt(3) / 2}% flank length half
 
-		\draw[dinthick] (0, -\shsh) -- ++(0:\flenh) -- ++(60:\flen) -- ++(120:\flen) -- ++(180:\flen) -- ++(240:\flen) -- ++(300:\flen) -- cycle;
-		\draw[dinthick] (0, 0) circle (\shsh);
-		\draw[dinthin, dindashdash] circle (\srad);
+		\pgfsetlinewidth{0.7mm}
+
+		\pgfsetcornersarced{\pgfpoint{\cornerround}{\cornerround}}
+		\pgfpathmoveto{\pgfpoint{0mm}{-\pgf@half}}
+		\pgfpathlineto{\pgfpoint{\flenh}{-\pgf@half}}
+		\pgfpathlineto{\pgfpoint{\flen}{0mm}}
+		\pgfpathlineto{\pgfpoint{\flenh}{\pgf@half}}
+		\pgfpathlineto{\pgfpoint{-\flenh}{\pgf@half}}
+		\pgfpathlineto{\pgfpoint{-\flen}{0mm}}
+		\pgfpathlineto{\pgfpoint{-\flenh}{-\pgf@half}}
+		\pgfpathclose
+		\pgfpathcircle{\centerpoint}{\pgf@half}
   }
-	\backgroundpath{}
+	\foregroundpath{
+		\pgfsetlinewidth{0.35mm}
+		\pgfsetdash{{5mm}{2mm}}{0mm}
+		\pgfpathcircle{\centerpoint}{\pgfkeysvalueof{/tikz/screw screw outer rad}}
+	}
 }
 
 \pgfdeclareshape{screwhexfront}

@@ -2,18 +2,33 @@
 
 \usepackage{tikz}
 \usepackage{din-dimline}
+\usepackage{din-screws}
 
 \usepackage{fontspec}
 \setmainfont{osifont.ttf}
 
-\usepackage{ulem}
+\pgfplotsset{compat=1.17}
+
+\pgfdeclarelayer{bg}
+\pgfdeclarelayer{fg}
+\pgfsetlayers{bg, main, fg}
 
 \begin{document}
 \begin{tikzpicture}
-
+	\draw[dinthick] (0, 0) rectangle (3, 6);
+	\pgfmathsetseed{12}
+	\draw[dinthin, dinfreehand, decorate] (0, 3) -- (3, 3);
+	\pgfmathsetseed{12}
+	\begin{pgfonlayer}{bg}
+		\fill[pattern = din material generic] (0, 0) -- (0, 3) decorate [dinfreehand] { -- (3, 3)} -- (3, 0);
+	\end{pgfonlayer}
+	\node [dinscrewholeside, screw screw outer rad = 6mm, screw screw inner rad = 4.77mm, screw screw height = 5mm] at (1.5, 0) {};
+\end{tikzpicture}
+\hspace{15mm}
+\begin{tikzpicture}
 	\foreach \x [evaluate = \x as \ang using 90+\x] in {0,30,...,330}{
 		\path (0, 0) -- ++(\x:10mm) coordinate (a);
-		\path (0, 0) -- ++(\x:50mm) coordinate (b);
+		\path (0, 0) -- ++(\x:30mm) coordinate (b);
 		\dimline[extension angle = \ang,
 		extension start offset = 0mm,
 		extension end offset = 0mm,
@@ -21,6 +36,5 @@
 		extension end overhang = 0mm
 		]{(a)}{(b)}{20}
 	}
-
 \end{tikzpicture}
 \end{document}

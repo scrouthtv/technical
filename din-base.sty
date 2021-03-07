@@ -1,7 +1,28 @@
 \usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{patterns.meta}
 
 \tikzstyle{dinthick}=[line width = 0.7mm]
 \tikzstyle{dinthin}=[line width = 0.35mm]
 \tikzstyle{dindashdash}=[dash pattern = on 5mm off 2mm]
-\tikzstyle{dindashdot}=[dash pattern = on \pgflinewidth off 2mm on 5mm off 2mm ]
-\tikzstyle{dinfreehand}=[decoration={random steps, amplitude = 5}, decorate, rounded corners = 3pt]
+\tikzstyle{dindashdot}=[dash pattern = on \pgflinewidth{} off 2mm on 5mm off 2mm ]
+
+\tikzstyle{dinfreehand}=[decoration={random steps, amplitude = 5}, rounded corners = 3pt]
+
+\pgfdeclarepattern{
+	name = din material generic,
+	bottom left = {\pgfpoint{-.4pt}{-.4pt}},
+	top right = {\pgfpoint{24.4pt}{24.4pt}},
+	tile size = {\pgfpoint{24pt}{24pt}},
+	code = {
+		\pgfpathmoveto{\pgfpoint{0pt}{12pt}}
+		\pgfpathlineto{\pgfpoint{12pt}{24pt}}
+		%
+		\pgfpathmoveto{\pgfpoint{0pt}{0pt}}
+		\pgfpathlineto{\pgfpoint{24pt}{24pt}}
+		%
+		\pgfpathmoveto{\pgfpoint{12pt}{0pt}}
+		\pgfpathlineto{\pgfpoint{24pt}{12pt}}
+		%
+		\pgfusepath{stroke}
+	}
+}

@@ -10,24 +10,24 @@
 	\saveddimen{\cornerround}{\pgf@x=\pgfkeysvalueof{/tikz/screw head round}}
 	\saveddimen{\height}{\pgf@x=\pgfkeysvalueof{/tikz/screw head size}}
 	\foregroundpath{
-		\dimendef\pgf@hh=0% half height
+		\dimendef\pgf@half=0% half height
 		\dimendef\flen=0%
 		\dimendef\flenh=0%
-		\pgfmathsetlength{\pgf@hh}{(\height / 2)}%
+		\pgfmathsetlength{\pgf@half}{(\height / 2)}%
 		\pgfmathsetlengthmacro{\flen}{\height / sqrt(3)}%
 		\pgfmathsetlengthmacro{\flenh}{\height / sqrt(3) / 2}%
 
 		\pgfsetcornersarced{\pgfpoint{\cornerround}{\cornerround}}
-		\pgfpathmoveto{\pgfpoint{0mm}{-\pgf@hh}}
-		\pgfpathlineto{\pgfpoint{\flenh}{-\pgf@hh}}
+		\pgfpathmoveto{\pgfpoint{0mm}{-\pgf@half}}
+		\pgfpathlineto{\pgfpoint{\flenh}{-\pgf@half}}
 		\pgfpathlineto{\pgfpoint{\flen}{0mm}}
-		\pgfpathlineto{\pgfpoint{\flenh}{\pgf@hh}}
-		\pgfpathlineto{\pgfpoint{-\flenh}{\pgf@hh}}
+		\pgfpathlineto{\pgfpoint{\flenh}{\pgf@half}}
+		\pgfpathlineto{\pgfpoint{-\flenh}{\pgf@half}}
 		\pgfpathlineto{\pgfpoint{-\flen}{0mm}}
-		\pgfpathlineto{\pgfpoint{-\flenh}{-\pgf@hh}}
+		\pgfpathlineto{\pgfpoint{-\flenh}{-\pgf@half}}
 		\pgfpathclose
 		\pgfusepath{stroke}
-		\pgfpathcircle{\centerpoint}{\pgf@hh}
+		\pgfpathcircle{\centerpoint}{\pgf@half}
 		\pgfusepath{stroke}
 	}
 }
