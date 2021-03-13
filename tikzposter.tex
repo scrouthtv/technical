@@ -27,31 +27,31 @@
 		\begin{scope}
 			\node[draw, screwhextop] at (0, 0) {};
 			\node[draw, screwhexfront] at (0, -4) {};
-			\draw[dinthin, dinfreehand] (-6.775mm, -6) -- (6.775mm, -6);
+			\draw[dinthin, dinfreehand, decorate] (-6.775mm, -6) -- (6.775mm, -6);
 			\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
 		\end{scope}
 		\begin{scope}[xshift = 80mm]
 			\node[draw, screwquadtop] at (0, 0) {};
 			\node[draw, screwquadfront] at (0, -4) {};
-			\draw[dinthin, dinfreehand] (-6.775mm, -6) -- (6.775mm, -6);
+			\draw[dinthin, dinfreehand, decorate] (-6.775mm, -6) -- (6.775mm, -6);
 			\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
 		\end{scope}
 		\begin{scope}[xshift = 160mm, screw head height = 16mm]
 			\node[draw, screwcyltop] at (0, 0) {};
 			\node[draw, screwcylfront] at (0, -4) {};
-			\draw[dinthin, dinfreehand] (-6.775mm, -6) -- (6.775mm, -6);
+			\draw[dinthin, dinfreehand, decorate] (-6.775mm, -6) -- (6.775mm, -6);
 			\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
 		\end{scope}
 		\begin{scope}[xshift = 240mm, screw head size = 30mm]
 			\node[draw, screwsinktop] at (0, 0) {};
 			\node[draw, screwsinkfront] at (0, -4) {};
-			\draw[dinthin, dinfreehand] (-6.775mm, -6) -- (6.775mm, -6);
+			\draw[dinthin, dinfreehand, decorate] (-6.775mm, -6) -- (6.775mm, -6);
 			\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
 		\end{scope}
 		\begin{scope}[xshift = 320mm, screw head size = 30mm]
 			\node[draw, screwbuttontop] at (0, 0) {};
 			\node[draw, screwbuttonfront] at (0, -4) {};
-			\draw[dinthin, dinfreehand] (-6.775mm, -6) -- (6.775mm, -6);
+			\draw[dinthin, dinfreehand, decorate] (-6.775mm, -6) -- (6.775mm, -6);
 			\draw[dinthin, dindashdot] (0, 3) -- (0, -10);
 		\end{scope}
 
@@ -60,9 +60,43 @@
 	\end{tikzpicture}
 }
 \block{Gewindefreistich\\\large nach DIN 76-1}{
-	\begin{tikzpicture}
+	\begin{tikzpicture}[
+			screw head size = 24mm, screw screw outer rad = 6.775mm, % todo: this should be 8mm
+			screw screw inner rad = 4mm,
+			screw head height = 10mm, screw head sink base = 1mm,
+			screw head round = 2.4mm,
+			screw undercut pre length = 7.5mm, screw undercut length = 7.5mm,
+			screw undercut post length = 20mm
+		]
+		% 1. draw the screw and clip it with a freehand rectangle
 		\begin{scope}[xshift = 0mm]
-			\node[draw, screwundercutinner] at (0, 0) {};
+			\pgfmathsetseed{18}
+			\clip[dinfreehand, decorate, clip] (-10mm, 0) rectangle (10mm, -25mm);
+			\node[draw, screwundercutinner] at (0, 1mm) {};
+		\end{scope}
+		% 2. draw the freehand rectangle and clip it with the screw
+		\begin{scope}[xshift = 0mm]
+			\clip (-6.775mm, 5mm) rectangle (6.775mm, -30mm);
+			\pgfmathsetseed{18}
+			\draw[dinthin, dinfreehand, decorate] (-10mm, 0) rectangle (10mm, -25mm);
+		\end{scope}
+		% 3. add some details
+		\begin{scope}[xshift = 0mm]
+			\draw[dinthin, dindashdot] (0, 1) -- (0, -3);
+		\end{scope}
+
+		\begin{scope}[xshift = 60mm]
+			\pgfmathsetseed{812}
+			\clip[dinfreehand, decorate, clip] (-10mm, 0) rectangle (10mm, -25mm);
+			\node[draw, screwundercutouter] at (0, 1mm) {};
+		\end{scope}
+		\begin{scope}[xshift = 60mm]
+			\clip (-6.775mm, 5mm) rectangle (6.775mm, -30mm);
+			\pgfmathsetseed{812}
+			\draw[dinthin, dinfreehand, decorate] (-10mm, 0) rectangle (10mm, -25mm);
+		\end{scope}
+		\begin{scope}[xshift = 60mm]
+			\draw[dinthin, dindashdot] (0, 1) -- (0, -3);
 		\end{scope}
 	\end{tikzpicture}
 }

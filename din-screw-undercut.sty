@@ -8,23 +8,126 @@
     \saveddimen\irad{\pgf@x=\pgfkeysvalueof{/tikz/screw screw inner rad}}
     \saveddimen\prelen{\pgf@x=\pgfkeysvalueof{/tikz/screw undercut pre length}}
     \saveddimen\uclen{\pgf@x=\pgfkeysvalueof{/tikz/screw undercut length}}
+		\saveddimen\postlen{\pgf@x=\pgfkeysvalueof{/tikz/screw undercut post length}}
     \backgroundpath{
-        \dimendef\len=0
-        \pgfmathsetlengthmacro{\len}{\orad + \irad}
+				\pgfmathsetlengthmacro{\bmid}{-\prelen - \uclen}
+				\pgfmathsetlengthmacro{\bend}{-\prelen - \uclen - \postlen}
         \pgfsetlinewidth{0.7mm}
 
         \pgfpathmoveto{\pgfpoint{-\orad}{0mm}}
-        \pgfpathlineto{\pgfpoint{-\orad}{\len}}
+        \pgfpathlineto{\pgfpoint{-\orad}{\bend}}
         \pgfpathmoveto{\pgfpoint{\orad}{0mm}}
-        \pgfpathlineto{\pgfpoint{\orad}{\len}}
+        \pgfpathlineto{\pgfpoint{\orad}{\bend}}
 
-        \pgfsetlinewdth{0.35mm}
+				\pgfpathmoveto{\pgfpoint{-\orad}{\bmid}}
+				\pgfpathlineto{\pgfpoint{\orad}{\bmid}}
 
-        \pgfpathmoveto{\pgfpoint{-\orad}{\prelen}
-        \pgfpathlineto{\pgfpoint{-\irad}{\len}}
-        \pgfpathmoveto{\pgfpoint{\orad}{\prelen}
-        \pgfpathlineto{\pgfpoint{\irad}{\len}}
-    }
+				\pgfusepath{stroke}
+
+        \pgfsetlinewidth{0.35mm}
+
+				\pgfpathmoveto{\pgfpoint{-\orad}{0mm}}
+				\pgfpathlineto{\pgfpoint{-\orad}{-\prelen}}
+        \pgfpathlineto{\pgfpoint{-\irad}{\bmid}}
+				\pgfpathlineto{\pgfpoint{-\irad}{\bend}}
+
+				\pgfpathmoveto{\pgfpoint{\orad}{0mm}}
+				\pgfpathlineto{\pgfpoint{\orad}{-\prelen}}
+        \pgfpathlineto{\pgfpoint{\irad}{\bmid}}
+				\pgfpathlineto{\pgfpoint{\irad}{\bend}}
+
+				\pgfusepath{stroke}
+		}
+}
+
+\pgfdeclareshape{screwundercutouter}
+{
+    \inheritsavedanchors[from=rectangle]
+    \inheritanchor[from=rectangle]{center}
+    \saveddimen\orad{\pgf@x=\pgfkeysvalueof{/tikz/screw screw outer rad}}
+    \saveddimen\irad{\pgf@x=\pgfkeysvalueof{/tikz/screw screw inner rad}}
+    \saveddimen\prelen{\pgf@x=\pgfkeysvalueof{/tikz/screw undercut pre length}}
+    \saveddimen\uclen{\pgf@x=\pgfkeysvalueof{/tikz/screw undercut length}}
+		\saveddimen\postlen{\pgf@x=\pgfkeysvalueof{/tikz/screw undercut post length}}
+    \backgroundpath{
+				\pgfmathsetlengthmacro{\bmid}{-\prelen - \uclen}
+				\pgfmathsetlengthmacro{\bend}{-\prelen - \uclen - \postlen}
+				\pgfmathsetlengthmacro{\bmmid}{-\prelen - (\uclen / 2)}
+				\pgfmathsetlengthmacro{\mrad}{(\orad + \irad) / 2}
+        \pgfsetlinewidth{0.7mm}
+
+				\pgfpathmoveto{\pgfpoint{-\orad}{0mm}}
+        \pgfpathlineto{\pgfpoint{-\orad}{-\prelen}} % |
+				\pgfpathlineto{\pgfpoint{-\mrad}{\bmmid}}   % \
+				\pgfpathlineto{\pgfpoint{-\orad}{\bmid}}    % /
+				\pgfpathlineto{\pgfpoint{-\orad}{\bend}}    % |
+				\pgfpathmoveto{\pgfpoint{\orad}{0mm}}
+        \pgfpathlineto{\pgfpoint{\orad}{-\prelen}}
+				\pgfpathlineto{\pgfpoint{\mrad}{\bmmid}}
+				\pgfpathlineto{\pgfpoint{\orad}{\bmid}}
+				\pgfpathlineto{\pgfpoint{\orad}{\bend}}
+
+				\pgfpathmoveto{\pgfpoint{-\orad}{-\prelen}}
+				\pgfpathlineto{\pgfpoint{\orad}{-\prelen}}
+				\pgfpathmoveto{\pgfpoint{-\orad}{\bmid}}
+				\pgfpathlineto{\pgfpoint{\orad}{\bmid}}
+				\pgfpathmoveto{\pgfpoint{-\irad}{\bmmid}}
+				\pgfpathlineto{\pgfpoint{\irad}{\bmmid}}
+
+				\pgfusepath{stroke}
+
+        \pgfsetlinewidth{0.35mm}
+
+				\pgfpathmoveto{\pgfpoint{-\mrad}{\bmmid}}
+				\pgfpathlineto{\pgfpoint{-\irad}{\bmid}}
+				\pgfpathlineto{\pgfpoint{-\irad}{\bend}}
+
+				\pgfpathmoveto{\pgfpoint{\mrad}{\bmmid}}
+				\pgfpathlineto{\pgfpoint{\irad}{\bmid}}
+				\pgfpathlineto{\pgfpoint{\irad}{\bend}}
+
+				\pgfusepath{stroke}
+		}
+}
+
+\pgfdeclareshape{screwundercutmid}
+{
+    \inheritsavedanchors[from=rectangle]
+    \inheritanchor[from=rectangle]{center}
+    \saveddimen\orad{\pgf@x=\pgfkeysvalueof{/tikz/screw screw outer rad}}
+    \saveddimen\irad{\pgf@x=\pgfkeysvalueof{/tikz/screw screw inner rad}}
+    \saveddimen\prelen{\pgf@x=\pgfkeysvalueof{/tikz/screw undercut pre length}}
+    \saveddimen\uclen{\pgf@x=\pgfkeysvalueof{/tikz/screw undercut length}}
+		\saveddimen\postlen{\pgf@x=\pgfkeysvalueof{/tikz/screw undercut post length}}
+    \backgroundpath{
+				\pgfmathsetlengthmacro{\bmid}{-\orad - \irad}
+				\pgfmathsetlengthmacro{\bend}{-\orad - \irad - \postlen}
+        \pgfsetlinewidth{0.7mm}
+
+        \pgfpathmoveto{\pgfpoint{-\orad}{0mm}}
+        \pgfpathlineto{\pgfpoint{-\orad}{\bend}}
+        \pgfpathmoveto{\pgfpoint{\orad}{0mm}}
+        \pgfpathlineto{\pgfpoint{\orad}{\bend}}
+
+				\pgfusepath{stroke}
+
+        \pgfsetlinewidth{0.35mm}
+
+				\pgfpathmoveto{\pgfpoint{-\orad}{0mm}}
+				\pgfpathlineto{\pgfpoint{-\orad}{-\prelen}}
+        \pgfpathlineto{\pgfpoint{-\irad}{\bmid}}
+				\pgfpathlineto{\pgfpoint{-\irad}{\bend}}
+
+				\pgfpathmoveto{\pgfpoint{\orad}{0mm}}
+				\pgfpathlineto{\pgfpoint{\orad}{-\prelen}}
+        \pgfpathlineto{\pgfpoint{\irad}{\bmid}}
+				\pgfpathlineto{\pgfpoint{\irad}{\bend}}
+
+				\pgfpathmoveto{\pgfpoint{-\orad}{\bmid}}
+				\pgfpathlineto{\pgfpoint{\orad}{\bmid}}
+
+				\pgfusepath{stroke}
+		}
 }
 
 \makeatother
