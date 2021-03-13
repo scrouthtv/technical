@@ -1,0 +1,30 @@
+\makeatletter
+
+\pgfdeclareshape{screwundercutinner}
+{
+    \inheritsavedanchors[from=rectangle]
+    \inheritanchor[from=rectangle]{center}
+    \saveddimen\orad{\pgf@x=\pgfkeysvalueof{/tikz/screw screw outer rad}}
+    \saveddimen\irad{\pgf@x=\pgfkeysvalueof{/tikz/screw screw inner rad}}
+    \saveddimen\prelen{\pgf@x=\pgfkeysvalueof{/tikz/screw undercut pre length}}
+    \saveddimen\uclen{\pgf@x=\pgfkeysvalueof{/tikz/screw undercut length}}
+    \backgroundpath{
+        \dimendef\len=0
+        \pgfmathsetlengthmacro{\len}{\orad + \irad}
+        \pgfsetlinewidth{0.7mm}
+
+        \pgfpathmoveto{\pgfpoint{-\orad}{0mm}}
+        \pgfpathlineto{\pgfpoint{-\orad}{\len}}
+        \pgfpathmoveto{\pgfpoint{\orad}{0mm}}
+        \pgfpathlineto{\pgfpoint{\orad}{\len}}
+
+        \pgfsetlinewdth{0.35mm}
+
+        \pgfpathmoveto{\pgfpoint{-\orad}{\prelen}
+        \pgfpathlineto{\pgfpoint{-\irad}{\len}}
+        \pgfpathmoveto{\pgfpoint{\orad}{\prelen}
+        \pgfpathlineto{\pgfpoint{\irad}{\len}}
+    }
+}
+
+\makeatother

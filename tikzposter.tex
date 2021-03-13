@@ -18,6 +18,7 @@
 \begin{columns}
 \column{.7}
 \block{Schraubenköpfe}{
+	\centering
 	\begin{tikzpicture}[ % M16
 			screw head size = 24mm, screw screw outer rad = 6.775mm, % todo: this should be 8mm
 			screw head height = 10mm, screw head sink base = 1mm,
@@ -58,8 +59,12 @@
 
 	\end{tikzpicture}
 }
-\block{Schafte}{
-	asdf
+\block{Gewindefreistich\\\large nach DIN 76-1}{
+	\begin{tikzpicture}
+		\begin{scope}[xshift = 0mm]
+			\node[draw, screwundercutinner] at (0, 0) {};
+		\end{scope}
+	\end{tikzpicture}
 }
 \column{.3}
 \block{a}{
