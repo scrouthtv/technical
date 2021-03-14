@@ -1,0 +1,60 @@
+\makeatletter
+
+\pgfdeclareshape{dinscrewholeside}
+{
+  \inheritsavedanchors[from=circle]
+  \inheritanchor[from=circle]{center}
+  \inheritanchor[from=circle]{base}
+  \inheritbackgroundpath[from=circle]
+	\saveddimen\orad{\pgf@x=\pgfkeysvalueof{/tikz/screw screw outer rad}}
+	\saveddimen\irad{\pgf@x=\pgfkeysvalueof{/tikz/screw screw inner rad}}
+	\saveddimen\sheight{\pgf@x=\pgfkeysvalueof{/tikz/screw screw height}}
+  \foregroundpath{
+		\draw[dinthick] (-\orad, 0) -- (-\orad, \sheight) (\orad, 0) -- (\orad, \sheight);
+  }
+	\backgroundpath{}
+}
+
+\pgfdeclareshape{dinscrewholetop}
+{
+  \inheritsavedanchors[from=circle]
+  \inheritanchor[from=circle]{center}
+  \inheritanchor[from=circle]{base}
+  \inheritbackgroundpath[from=circle]
+	\saveddimen\shs{\pgf@x=\pgfkeysvalueof{/tikz/screw head size}}
+	\saveddimen\shh{\pgf@x=\pgfkeysvalueof{/tikz/screw head height}}
+	\saveddimen\shc{\pgf@x=\pgfkeysvalueof{/tikz/screw head screw height}}
+  \foregroundpath{
+		\dimendef\flen=0
+		\pgfmathsetlengthmacro{\flen}{\pgfkeysvalueof{/tikz/screw head size} / sqrt(3)}% flank length
+		\dimendef\flenh=0
+		\pgfmathsetlengthmacro{\flenh}{\pgfkeysvalueof{/tikz/screw head size} / sqrt(3) / 2}% flank length half
+		\dimendef\flentt=0
+		\pgfmathsetlengthmacro{\flentt}{\pgfkeysvalueof{/tikz/screw head size} / sqrt(3) * 3 / 4}% flank length half
+		%\dimendef\shsh=0
+		%\pgfmathsetlengthmacro{\shsh}{\shs / 2}
+		%\dimendef\sdiam=0
+		%\pgfmathsetlengthmacro{\sdiam}{\pgfkeysvalueof{/tikz/screwdiam}}
+		%\dimendef\projlen=0
+		%\pgfmathsetlengthmacro{\projlen}{\flen / 4}
+		\dimendef\sdiam=0
+		\pgfmathsetlengthmacro{\sdiam}{\pgfkeysvalueof{/tikz/screw screw outer rad}}
+
+		%\draw[dinthick] (0, -\shsh) -- ++(0:\flenh) -- ++(60:\flen) -- ++(120:\flen) -- ++(180:\flen) -- ++(240:\flen) -- ++(300:\flen) -- cycle;
+		%\draw[dinthick] (0, 0) circle (\shsh);
+		%\draw[dinthin, dindashdash] circle (\sdiam);
+		\draw[dinthick] (-\flen, 0) -- (\flen, 0);
+		\draw[dinthick, rounded corners = 8pt] (0, \shh) -| (\flenh, 0);
+		\draw[dinthick, rounded corners = 8pt] (0, \shh) -| (-\flenh, 0);
+		\draw[dinthick, rounded corners = 8pt] (\flentt, \shh) -| (\flenh, 0);
+		\draw[dinthick, rounded corners = 8pt] (\flentt, \shh) -| (\flen, 0);
+		\draw[dinthick, rounded corners = 8pt] (-\flentt, \shh) -| (-\flenh, 0);
+		\draw[dinthick, rounded corners = 8pt] (-\flentt, \shh) -| (-\flen, 0);
+		\draw[dinthick] (-\flentt, \shh) -- (\flentt, \shh);
+		\draw[dinthick] (-\sdiam, 0) -- (-\sdiam, -\shc);
+		\draw[dinthick] (\sdiam, 0) -- (\sdiam, -\shc);
+  }
+	\backgroundpath{}
+}
+
+\makeatother
